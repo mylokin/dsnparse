@@ -15,10 +15,10 @@ For example, let's look at a prom dsn:
 Now let's parse it:
 
 ```python
-import dsnparse
+import dsnparse3
 
 dsn = "prom.interface.postgres.Interface://testuser:testpw@localhost:1234/testdb"
-r = dsnparse.parse(dsn)
+r = dsnparse3.parse(dsn)
 
 print r.scheme # prom.interface.postgres.Interface
 print r.username # testuser
@@ -34,17 +34,11 @@ Also, dsnparse can easily use environment variables:
 r = dsnparse.parse_environ('ENVIRONMENT_VARIABLE_NAME')
 ```
 
-I tried to keep the interface very similar to `urlparse` so it will feel familiar to use.
-
 ## Install
 
 Use pip:
 
-    pip install dsnparse
-
-or use github:
-
-    pip install git+https://github.com/Jaymon/dsnparse#egg=dsnparse
+    pip install dsnparse3
 
 ## License
 

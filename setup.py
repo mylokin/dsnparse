@@ -6,7 +6,7 @@ import sys
 from setuptools import setup
 import ast
 
-name = 'dsnparse'
+name = 'dsnparse3'
 version = ''
 with open('{}.py'.format(name), 'rU') as f:
     for node in (n for n in ast.parse(f.read()).body if isinstance(n, ast.Assign)):
@@ -24,7 +24,7 @@ setup(
     description='parse dsn urls',
     author='Jay Marcyes',
     author_email='jay@marcyes.com',
-    url='http://github.com/Jaymon/{}'.format(name),
+    url='http://github.com/mylokin/{}'.format(name),
     py_modules=[name],
     license="MIT",
     classifiers=[ # https://pypi.python.org/pypi?:action=list_classifiers
@@ -33,7 +33,7 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.4',
     ],
     test_suite = "dsnparse_test",
 )

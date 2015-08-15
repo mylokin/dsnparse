@@ -92,7 +92,7 @@ class DsnParseTest(TestCase):
 
         for dsn, test_out in tests:
             r = dsnparse.parse(dsn)
-            for k, v in test_out.iteritems():
+            for k, v in test_out.items():
                 self.assertEqual(v, getattr(r, k))
 
         with self.assertRaises(AssertionError):

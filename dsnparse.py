@@ -1,4 +1,4 @@
-import urlparse
+import urllib.parse
 import re
 import os
 
@@ -30,12 +30,12 @@ def parse(dsn, **default_vals):
     first_colon = dsn.find(':')
     scheme = dsn[0:first_colon]
     dsn_url = dsn[first_colon+1:]
-    url = urlparse.urlparse(dsn_url)
+    url = urllib.parse.urlparse(dsn_url)
 
     # parse the query into options
     options = {}
     if url.query:
-        for k, kv in urlparse.parse_qs(url.query, True, True).iteritems():
+        for k, kv in urllib.parse.parse_qs(url.query, True, True).items():
             if len(kv) > 1:
                 options[k] = kv
             else:
@@ -53,7 +53,7 @@ def parse(dsn, **default_vals):
         port=url.port,
         query_str=url.query,
     )
-    for k, v in default_vals.iteritems():
+    for k, v in default_vals.items():
         r.setdefault(k, v)
 
     return r
@@ -84,7 +84,7 @@ class ParseResult(object):
         anchor -- same as fragment, just an alternative name
     """
     def __init__(self, **kwargs):
-        for k, v in kwargs.iteritems():
+        for k, v in kwargs.items():
             setattr(self, k, v)
 
     def __iter__(self):
@@ -129,7 +129,7 @@ class ParseResult(object):
     @property
     def paths(self):
         """the path attribute split by /"""
-        return filter(None, self.path.split('/'))
+        return [_f for _f in self.path.split('/') if _f]
 
     @property
     def host(self):
@@ -166,7 +166,7 @@ class ParseResult(object):
 
     def geturl(self):
         """return the dsn back into url form"""
-        return urlparse.urlunparse((
+        return urllib.parse.urlunparse((
             self.scheme,
             self.netloc,
             self.path,

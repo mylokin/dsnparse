@@ -1,7 +1,7 @@
 from unittest import TestCase
 import os
 
-import dsnparse
+import dsnparse3
 
 class DsnParseTest(TestCase):
     def test_parse(self):
@@ -91,21 +91,21 @@ class DsnParseTest(TestCase):
         ]
 
         for dsn, test_out in tests:
-            r = dsnparse.parse(dsn)
+            r = dsnparse3.parse(dsn)
             for k, v in test_out.items():
                 self.assertEqual(v, getattr(r, k))
 
         with self.assertRaises(AssertionError):
-            r = dsnparse.parse('//host.com:1234')
+            r = dsnparse3.parse('//host.com:1234')
 
     def test_geturl(self):
         dsn = 'scheme://username:password@host:1234/bar/che?option1=opt_val1&option2=opt_val2#anchor'
-        r = dsnparse.parse(dsn)
+        r = dsnparse3.parse(dsn)
         self.assertEqual(dsn, r.geturl())
 
     def test_parse_environ(self):
         os.environ['TEST_DSN'] = 'scheme://username:password@host:1234/foo'
-        r = dsnparse.parse_environ('TEST_DSN')
+        r = dsnparse3.parse_environ('TEST_DSN')
         self.assertEqual(os.environ['TEST_DSN'], r.geturl())
 
     def test_unpack(self):
@@ -118,7 +118,7 @@ class DsnParseTest(TestCase):
             'query': {},
             'fragment': ''
         }
-        scheme, netloc, path, params, query, fragment = dsnparse.parse(dsn)
+        scheme, netloc, path, params, query, fragment = dsnparse3.parse(dsn)
         self.assertEqual('scheme', scheme)
         self.assertEqual('username:password@host:1234', netloc)
         self.assertEqual('/foo', path)
@@ -128,7 +128,7 @@ class DsnParseTest(TestCase):
 
     def test___getitem__(self):
         dsn = 'scheme://username:password@host:1234/foo'
-        r = dsnparse.parse(dsn)
+        r = dsnparse3.parse(dsn)
         self.assertEqual('scheme', r[0])
         self.assertEqual('username:password@host:1234', r[1])
         self.assertEqual('/foo', r[2])
@@ -138,13 +138,13 @@ class DsnParseTest(TestCase):
 
     def test_setdefault(self):
         dsn = 'scheme://username:password@host/foo'
-        r = dsnparse.parse(dsn)
+        r = dsnparse3.parse(dsn)
         self.assertEqual(None, r.port)
 
         r.setdefault('port', 1234)
         self.assertEqual(1234, r.port)
 
-        r = dsnparse.parse(dsn, port=1235)
+        r = dsnparse3.parse(dsn, port=1235)
         self.assertEqual(1235, r.port)
 
 

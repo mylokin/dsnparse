@@ -1,5 +1,7 @@
 # dsnparse
 
+[![Build Status](https://travis-ci.org/mylokin/dsnparse3.svg?branch=master)](https://travis-ci.org/mylokin/dsnparse3)
+
 Parse [dsn connection url strings](http://en.wikipedia.org/wiki/Data_source_name). I kept duplicating dsn parsing code for things like [prom](https://github.com/firstopinion/prom) and morp, and I realized I was going to need many more dsn urls in the future so I decided to create something a little more modular.
 
 This is a generic version of [dj-database-url](https://github.com/kennethreitz/dj-database-url).
